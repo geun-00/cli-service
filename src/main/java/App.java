@@ -14,11 +14,16 @@ public class App {
 
         switch (rq.getMainCommand()) {
             case "write" -> writeArticle();
+            case "list" -> listArticles();
         }
 
     }
 
     private void writeArticle() {
         System.out.println("게시글이 등록되었습니다.");
+    }
+
+    private void listArticles() {
+        System.out.println("번호 | 제목     | 등록일      ");
     }
 }

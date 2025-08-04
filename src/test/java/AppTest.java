@@ -7,7 +7,7 @@ public class AppTest {
 
     @Test
     @DisplayName("write 명령어는 \"게시글이 등록되었습니다.\"를 출력한다. ")
-    void test() {
+    void write() {
         //given
         String input = "write";
 
@@ -16,6 +16,20 @@ public class AppTest {
 
         //then
         String expectedOutput = "게시글이 등록되었습니다.";
+        assertThat(result).contains(expectedOutput);
+    }
+
+    @Test
+    @DisplayName("list 명령어는 \"번호 | 제목 | 등록일\"을 출력한다.")
+    void list() {
+        //given
+        String input = "list";
+
+        //when
+        String result = AppTestRunner.run(input);
+
+        //then
+        String expectedOutput = "번호 | 제목     | 등록일      ";
         assertThat(result).contains(expectedOutput);
     }
 }
