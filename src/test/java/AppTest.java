@@ -9,7 +9,12 @@ public class AppTest {
     @DisplayName("write 명령어는 \"게시글이 등록되었습니다.\"를 출력한다. ")
     void write() {
         //given
-        String input = "write";
+        String input = """
+                write
+                자바 공부
+                자바 텍스트 게시판 만들기
+                exit
+                """;
 
         //when
         String result = AppTestRunner.run(input);
@@ -23,7 +28,10 @@ public class AppTest {
     @DisplayName("list 명령어는 \"번호 | 제목 | 등록일\"을 출력한다.")
     void list() {
         //given
-        String input = "list";
+        String input = """
+                list
+                exit
+                """;
 
         //when
         String result = AppTestRunner.run(input);
@@ -37,7 +45,13 @@ public class AppTest {
     @DisplayName("detail [id] 명령어는 \"번호:, 제목:, 내용:, 등록일:\"을 출력한다.")
     void detail() {
         //given
-        String input = "detail 1";
+        String input = """
+                write
+                자바 공부
+                자바 텍스트 게시판 만들기
+                detail 1
+                exit
+                """;
 
         //when
         String result = AppTestRunner.run(input);
@@ -53,7 +67,15 @@ public class AppTest {
     @DisplayName("update [id] 명령어는 \"게시글이 수정되었습니다.\"를 출력한다.")
     void update() {
         //given
-        String input = "update 1";
+        String input = """
+                write
+                자바 공부
+                자바 텍스트 게시판 만들기
+                update 1
+                Java 게시판
+                콘솔 기반으로 구현
+                exit
+                """;
 
         //when
         String result = AppTestRunner.run(input);
@@ -66,7 +88,10 @@ public class AppTest {
     @DisplayName("delete [id] 명령어는 \"게시글이 삭제되었습니다.\"를 출력한다.")
     void delete() {
         //given
-        String input = "delete 1";
+        String input = """
+                delete 1
+                exit
+                """;
 
         //when
         String result = AppTestRunner.run(input);
