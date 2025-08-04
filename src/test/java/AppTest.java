@@ -32,4 +32,20 @@ public class AppTest {
         String expectedOutput = "번호 | 제목     | 등록일      ";
         assertThat(result).contains(expectedOutput);
     }
+
+    @Test
+    @DisplayName("detail [id] 명령어는 \"번호:, 제목:, 내용:, 등록일:\"을 출력한다.")
+    void detail() {
+        //given
+        String input = "detail 1";
+
+        //when
+        String result = AppTestRunner.run(input);
+
+        //then
+        assertThat(result).contains("번호: ");
+        assertThat(result).contains("제목: ");
+        assertThat(result).contains("내용: ");
+        assertThat(result).contains("등록일: ");
+    }
 }

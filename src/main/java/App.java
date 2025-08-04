@@ -15,8 +15,16 @@ public class App {
         switch (rq.getMainCommand()) {
             case "write" -> writeArticle();
             case "list" -> listArticles();
+            case "detail" -> showDetail(rq.getId());
         }
 
+    }
+
+    private void showDetail(int id) {
+        System.out.println("번호: ");
+        System.out.println("제목: ");
+        System.out.println("내용: ");
+        System.out.println("등록일: ");
     }
 
     private void writeArticle() {
