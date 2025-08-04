@@ -17,8 +17,13 @@ public class App {
             case "list" -> listArticles();
             case "detail" -> showDetail(rq.getId());
             case "update" -> updateArticle(rq.getId());
+            case "delete" -> deleteArticle(rq.getId());
         }
 
+    }
+
+    private void deleteArticle(int id) {
+        System.out.println("게시글이 삭제되었습니다.");
     }
 
     private void updateArticle(int id) {

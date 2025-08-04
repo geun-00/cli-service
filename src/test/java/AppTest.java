@@ -61,4 +61,17 @@ public class AppTest {
         //then
         assertThat(result).contains("게시글이 수정되었습니다.");
     }
+
+    @Test
+    @DisplayName("delete [id] 명령어는 \"게시글이 삭제되었습니다.\"를 출력한다.")
+    void delete() {
+        //given
+        String input = "delete 1";
+
+        //when
+        String result = AppTestRunner.run(input);
+
+        //then
+        assertThat(result).contains("게시글이 삭제되었습니다.");
+    }
 }
