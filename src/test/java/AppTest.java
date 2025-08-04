@@ -25,7 +25,7 @@ public class AppTest {
     }
 
     @Test
-    @DisplayName("list 명령어는 \"번호 | 제목 | 등록일\"을 출력한다.")
+    @DisplayName("list 명령어는 \"번호 | 제목 | 등록일 | 조회수\"를 출력한다.")
     void list() {
         //given
         String input = """
@@ -37,12 +37,12 @@ public class AppTest {
         String result = AppTestRunner.run(input);
 
         //then
-        String expectedOutput = "번호 | 제목     | 등록일      ";
+        String expectedOutput = "번호 | 제목     | 등록일      | 조회수";
         assertThat(result).contains(expectedOutput);
     }
 
     @Test
-    @DisplayName("detail [id] 명령어는 \"번호:, 제목:, 내용:, 등록일:\"을 출력한다.")
+    @DisplayName("detail [id] 명령어는 \"번호:, 제목:, 내용:, 등록일:, 조회수: \"를 출력한다.")
     void detail() {
         //given
         String input = """
@@ -61,6 +61,7 @@ public class AppTest {
         assertThat(result).contains("제목: ");
         assertThat(result).contains("내용: ");
         assertThat(result).contains("등록일: ");
+        assertThat(result).contains("조회수: ");
     }
 
     @Test
