@@ -42,6 +42,7 @@ public class RqTest {
 
         //then
         String[] split = input.split(" ");
+        
         String expectedMainCommand = split[0];
         int expectedId = Integer.parseInt(split[1]);
 
