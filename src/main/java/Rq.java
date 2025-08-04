@@ -6,7 +6,8 @@ public class Rq {
     private Map<String, String> params;
 
     public Rq(String input) {
-        this.mainCommand = input;
+        String[] split = input.split(" ");
+        this.mainCommand = split[0];
     }
 
     public String getMainCommand() {
