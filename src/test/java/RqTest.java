@@ -42,7 +42,26 @@ public class RqTest {
 
         //then
         String[] split = input.split(" ");
-        
+
+        String expectedMainCommand = split[0];
+        int expectedId = Integer.parseInt(split[1]);
+
+        assertEquals(expectedMainCommand, rq.getMainCommand());
+        assertEquals(expectedId, rq.getId());
+    }
+
+    @Test
+    @DisplayName("update [id] 명령어")
+    void test() {
+        //given
+        String input = "update 1";
+
+        //when
+        Rq rq = new Rq(input);
+
+        //then
+        String[] split = input.split(" ");
+
         String expectedMainCommand = split[0];
         int expectedId = Integer.parseInt(split[1]);
 
