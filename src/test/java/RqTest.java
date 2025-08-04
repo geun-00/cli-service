@@ -87,4 +87,17 @@ public class RqTest {
         assertEquals(expectedMainCommand, rq.getMainCommand());
         assertEquals(expectedId, rq.getId());
     }
+
+    @Test
+    @DisplayName("exit 명령어")
+    void exit() {
+        //given
+        String input = "exit";
+
+        //when
+        Rq rq = new Rq(input);
+
+        //then
+        assertEquals(input, rq.getMainCommand());
+    }
 }
