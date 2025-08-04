@@ -74,4 +74,17 @@ public class AppTest {
         //then
         assertThat(result).contains("게시글이 삭제되었습니다.");
     }
+
+    @Test
+    @DisplayName("exit [id] 명령어는 \"프로그램을 종료합니다.\"를 출력한다.")
+    void exit() {
+        //given
+        String input = "exit";
+
+        //when
+        String result = AppTestRunner.run(input);
+
+        //then
+        assertThat(result).contains("프로그램을 종료합니다.");
+    }
 }

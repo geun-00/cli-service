@@ -18,8 +18,13 @@ public class App {
             case "detail" -> showDetail(rq.getId());
             case "update" -> updateArticle(rq.getId());
             case "delete" -> deleteArticle(rq.getId());
+            case "exit" -> exit();
         }
 
+    }
+
+    private void exit() {
+        System.out.println("프로그램을 종료합니다.");
     }
 
     private void deleteArticle(int id) {
