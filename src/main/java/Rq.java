@@ -1,9 +1,7 @@
-import java.util.Map;
-
 public class Rq {
 
     private final String mainCommand;
-    private Map<String, String> params;
+    private int id;
 
     public Rq(String input) {
         String[] split = input.split(" ");
@@ -12,5 +10,9 @@ public class Rq {
 
     public String getMainCommand() {
         return mainCommand;
+    }
+
+    public int getId() {
+        return id;
     }
 }

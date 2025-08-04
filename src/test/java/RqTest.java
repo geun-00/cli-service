@@ -30,4 +30,22 @@ public class RqTest {
         //then
         assertEquals(input, rq.getMainCommand());
     }
+
+    @Test
+    @DisplayName("detail [id] 명령어")
+    void detail() {
+        //given
+        String input = "detail 1";
+
+        //when
+        Rq rq = new Rq(input);
+
+        //then
+        String[] split = input.split(" ");
+        String expectedMainCommand = split[0];
+        int expectedId = Integer.parseInt(split[1]);
+
+        assertEquals(expectedMainCommand, rq.getMainCommand());
+        assertEquals(expectedId, rq.getId());
+    }
 }
