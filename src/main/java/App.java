@@ -44,16 +44,20 @@ public class App {
     }
 
     private void listArticles() {
-        System.out.println("번호 | 제목     | 등록일      ");
-        System.out.println("----------------------------------");
+        System.out.printf("%-4s | %-20s | %-12s | %-6s\n", "번호", "제목", "등록일", "조회수");
+        System.out.println("----------------------------------------------------------");
         List<Article> articles = articleService.listArticles();
 
         for (Article article : articles) {
             System.out.printf(
-                    "%d | %s     | %s      \n",
-                    article.getId(), article.getTitle(), article.getRegDate()
+                    "%-4d | %-20s | %-12s | %-6d\n",
+                    article.getId(),
+                    article.getTitle(),
+                    article.getRegDate(),
+                    article.getViewCount()
             );
         }
+        System.out.println();
     }
 
     private void showDetail(int id) {
@@ -62,10 +66,13 @@ public class App {
             return;
         }
 
+        article.addViewCount();
+
         System.out.println("번호: " + article.getId());
         System.out.println("제목: " + article.getTitle());
         System.out.println("내용: " + article.getContent());
         System.out.println("등록일: " + article.getRegDate());
+        System.out.println("조회수: " + article.getViewCount());
         System.out.println();
     }
 
