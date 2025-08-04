@@ -48,4 +48,17 @@ public class AppTest {
         assertThat(result).contains("내용: ");
         assertThat(result).contains("등록일: ");
     }
+
+    @Test
+    @DisplayName("update [id] 명령어는 \"게시글이 수정되었습니다.\"를 출력한다.")
+    void update() {
+        //given
+        String input = "update 1";
+
+        //when
+        String result = AppTestRunner.run(input);
+
+        //then
+        assertThat(result).contains("게시글이 수정되었습니다.");
+    }
 }
