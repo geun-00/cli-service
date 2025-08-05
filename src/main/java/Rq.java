@@ -1,5 +1,8 @@
+import lombok.Getter;
+
 import java.util.Set;
 
+@Getter
 public class Rq {
 
     private static final Set<String> ID_REQUIRED_COMMANDS = Set.of("detail", "update", "delete");
@@ -22,21 +25,5 @@ public class Rq {
         } else if (ORDER_BY_REQUIRED_COMMANDS.contains(mainCommand)) {
             this.orderBy = split[1];
         }
-    }
-
-    public String getMainCommand() {
-        return mainCommand;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public String getOrderBy() {
-        return orderBy;
     }
 }
