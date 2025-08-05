@@ -37,7 +37,7 @@ public class AppTest {
         String result = AppTestRunner.run(input);
 
         //then
-        String expectedOutput = "번호 | 제목     | 등록일      | 조회수";
+        String expectedOutput = "번호   | 제목                   | 등록일          | 조회수   ";
         assertThat(result).contains(expectedOutput);
     }
 

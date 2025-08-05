@@ -100,4 +100,23 @@ public class RqTest {
         //then
         assertEquals(input, rq.getMainCommand());
     }
+
+    @Test
+    @DisplayName("search [keyword] 명령어")
+    void test() {
+        //given
+        String input = "search 자바 공부";
+
+        //when
+        Rq rq = new Rq(input);
+
+        //then
+        String[] split = input.split(" ");
+
+        String expectedMainCommand = split[0];
+        String expectedKeyword = input.substring(expectedMainCommand.length());
+
+        assertEquals(expectedMainCommand, rq.getMainCommand());
+        assertEquals(expectedKeyword, rq.getKeyword());
+    }
 }
