@@ -43,4 +43,12 @@ public class ListArticleService implements ArticleService {
     public void deleteArticle(int id) {
         articleList.removeIf(article -> article.getId() == id);
     }
+
+    @Override
+    public List<Article> findByKeyword(String keyword) {
+        return articleList.stream()
+                          .filter(article ->
+                                  article.getTitle().contains(keyword) || article.getContent().contains(keyword)
+                          ).toList();
+    }
 }

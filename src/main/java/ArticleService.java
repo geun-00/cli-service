@@ -11,6 +11,7 @@ public interface ArticleService {
     Article findById(int id);
     void updateArticle(int id, String newTitle, String newContent);
     void deleteArticle(int id);
+    List<Article> findByKeyword(String keyword);
 
     default String getCurrentDate() {
         LocalDateTime now = LocalDateTime.now();

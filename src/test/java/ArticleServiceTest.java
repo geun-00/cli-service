@@ -147,4 +147,28 @@ public class ArticleServiceTest {
         assertThat(article).isNull();
         assertThat(articles).hasSize(2);
     }
+
+    @Test
+    @DisplayName("findByKeyword()는 keyword를 포함하는 Article을 반환한다.")
+    void test() {
+        //given
+        String title1 = "자바 공부";
+        String content1 = "자바 텍스트 게시판 만들기";
+        String title2 = "파이썬 공부";
+        String content2 = "파이썬 텍스트 게시판 만들기";
+        String title3 = "C 공부";
+        String content3 = "C 텍스트 게시판 만들기";
+
+        articleService.writeArticle(title1, content1);
+        articleService.writeArticle(title2, content2);
+        articleService.writeArticle(title3, content3);
+
+        String keyword = "텍스트 게시판 만들기";
+
+        //when
+        List<Article> articles = articleService.findByKeyword(keyword);
+
+        //then
+        assertThat(articles).hasSize(3);
+    }
 }
