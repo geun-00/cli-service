@@ -24,6 +24,7 @@ public class App {
                 case "detail" -> showDetail(rq.getId());
                 case "update" -> updateArticle(rq.getId());
                 case "delete" -> deleteArticle(rq.getId());
+                case "search" -> searchArticles(rq.getKeyword());
                 case "exit" -> {
                     exit();
                     return;
@@ -32,21 +33,17 @@ public class App {
         }
     }
 
-    private void writeArticle() {
-        System.out.print("제목: ");
-        String title = sc.nextLine();
-
-        System.out.print("내용: ");
-        String content = sc.nextLine();
-
-        articleService.writeArticle(title, content);
-        System.out.println("=> 게시글이 등록되었습니다.\n");
+    private void searchArticles(String keyword) {
+        printArticles(articleService.findByKeyword(keyword.toLowerCase()));
     }
 
     private void listArticles() {
+        printArticles(articleService.listArticles());
+    }
+
+    private void printArticles(List<Article> articles) {
         System.out.printf("%-4s | %-20s | %-12s | %-6s\n", "번호", "제목", "등록일", "조회수");
         System.out.println("----------------------------------------------------------");
-        List<Article> articles = articleService.listArticles();
 
         for (Article article : articles) {
             System.out.printf(
@@ -58,6 +55,17 @@ public class App {
             );
         }
         System.out.println();
+    }
+
+    private void writeArticle() {
+        System.out.print("제목: ");
+        String title = sc.nextLine();
+
+        System.out.print("내용: ");
+        String content = sc.nextLine();
+
+        articleService.writeArticle(title, content);
+        System.out.println("=> 게시글이 등록되었습니다.\n");
     }
 
     private void showDetail(int id) {
