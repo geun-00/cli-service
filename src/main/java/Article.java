@@ -1,3 +1,10 @@
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class Article {
     private int id;
     private String regDate;
@@ -10,36 +17,6 @@ public class Article {
         this.title = title;
         this.content = content;
         this.regDate = regDate;
-    }
-
-    public Article() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getRegDate() {
-        return regDate;
-    }
-
-    public int getViewCount() {
-        return viewCount;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public void addViewCount() {
