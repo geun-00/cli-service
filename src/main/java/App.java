@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,12 +26,34 @@ public class App {
                 case "update" -> updateArticle(rq.getId());
                 case "delete" -> deleteArticle(rq.getId());
                 case "search" -> searchArticles(rq.getKeyword());
+                case "orderBy" -> searchOrderByArticles(rq.getOrderBy());
                 case "exit" -> {
                     exit();
                     return;
                 }
             }
         }
+    }
+
+    private void searchOrderByArticles(String orderBy) {
+        List<Article> articles = articleService.listArticles();
+        Comparator<Article> comparator = getComparator(orderBy);
+        List<Article> sortedArticles = articles.stream()
+                                               .sorted(comparator)
+                                               .toList();
+        printArticles(sortedArticles);
+    }
+
+    private Comparator<Article> getComparator(String orderBy) {
+        if ("id".equalsIgnoreCase(orderBy)) {
+            return Comparator.comparingInt(Article::getId);
+        }
+        if ("date".equalsIgnoreCase(orderBy)) {
+            return Comparator.comparing(Article::getRegDate).reversed();
+        }
+
+        //기본 - 조회순 정렬
+        return Comparator.comparingInt(Article::getViewCount).reversed();
     }
 
     private void searchArticles(String keyword) {

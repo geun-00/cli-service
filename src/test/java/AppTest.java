@@ -116,10 +116,27 @@ public class AppTest {
 
     @Test
     @DisplayName("search [keyword] 명령어는 \"번호 | 제목 | 등록일 | 조회수\"를 출력한다.")
-    void test() {
+    void keyword() {
         //given
         String input = """
                 search 자바 공부
+                exit
+                """;
+
+        //when
+        String result = AppTestRunner.run(input);
+
+        //then
+        String expectedOutput = "번호   | 제목                   | 등록일          | 조회수   ";
+        assertThat(result).contains(expectedOutput);
+    }
+
+    @Test
+    @DisplayName("orderBy [option] 명령어는 \"번호 | 제목 | 등록일 | 조회수\"를 출력한다.")
+    void orderBy() {
+        //given
+        String input = """
+                orderBy date
                 exit
                 """;
 
