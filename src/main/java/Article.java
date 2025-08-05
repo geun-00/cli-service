@@ -1,6 +1,6 @@
 public class Article {
-    private final int id;
-    private final String regDate;
+    private int id;
+    private String regDate;
     private String title;
     private String content;
     private int viewCount;
@@ -11,6 +11,8 @@ public class Article {
         this.content = content;
         this.regDate = regDate;
     }
+
+    public Article() {}
 
     public int getId() {
         return id;

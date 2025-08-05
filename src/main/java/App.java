@@ -9,7 +9,8 @@ public class App {
 
     public App(Scanner sc) {
         this.sc = sc;
-        this.articleService = new ListArticleService();
+//        this.articleService = new ListArticleService();
+        this.articleService = new FileArticleService();
     }
 
     public void run() {
@@ -96,8 +97,6 @@ public class App {
         if (article == null) {
             return;
         }
-
-        article.addViewCount();
 
         System.out.println("번호: " + article.getId());
         System.out.println("제목: " + article.getTitle());

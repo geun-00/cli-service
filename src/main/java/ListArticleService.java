@@ -24,10 +24,17 @@ public class ListArticleService implements ArticleService {
 
     @Override
     public Article findById(int id) {
-        return articleList.stream()
-                          .filter(article -> article.getId() == id)
-                          .findFirst()
-                          .orElse(null);
+        Article foundArticle = articleList.stream()
+                                      .filter(article -> article.getId() == id)
+                                      .findFirst()
+                                      .orElse(null);
+
+        if (foundArticle != null) {
+            foundArticle.addViewCount();
+            return foundArticle;
+        }
+
+        return null;
     }
 
     @Override
