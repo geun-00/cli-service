@@ -103,7 +103,7 @@ public class RqTest {
 
     @Test
     @DisplayName("search [keyword] 명령어")
-    void test() {
+    void keyword() {
         //given
         String input = "search 자바 공부";
 
@@ -118,5 +118,24 @@ public class RqTest {
 
         assertEquals(expectedMainCommand, rq.getMainCommand());
         assertEquals(expectedKeyword, rq.getKeyword());
+    }
+
+    @Test
+    @DisplayName("orderBy [option] 명령어")
+    void orderBy() {
+        //given
+        String input = "orderBy date";
+
+        //when
+        Rq rq = new Rq(input);
+
+        //then
+        String[] split = input.split(" ");
+
+        String expectedMainCommand = split[0];
+        String expectedOrderBy = split[1];
+
+        assertEquals(expectedMainCommand, rq.getMainCommand());
+        assertEquals(expectedOrderBy, rq.getOrderBy());
     }
 }
