@@ -17,7 +17,9 @@ public class ListArticleService implements ArticleService {
 
     @Override
     public List<Article> listArticles() {
-        return new ArrayList<>(articleList);
+        return articleList.stream()
+                          .sorted((origin, other) -> other.getRegDate().compareTo(origin.getRegDate()))
+                          .toList();
     }
 
     @Override
@@ -49,6 +51,8 @@ public class ListArticleService implements ArticleService {
         return articleList.stream()
                           .filter(article ->
                                   article.getTitle().contains(keyword) || article.getContent().contains(keyword)
-                          ).toList();
+                          )
+                          .sorted((origin, other) -> other.getRegDate().compareTo(origin.getRegDate()))
+                          .toList();
     }
 }
