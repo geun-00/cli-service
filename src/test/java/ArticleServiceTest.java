@@ -66,7 +66,9 @@ public class ArticleServiceTest {
         articleService.writeArticle(title3, content3);
 
         //when
-        List<Article> articles = articleService.listArticles();
+        PageResponse<Article> pageResponse = articleService.listArticles(
+                new PageRequest(1, 10), "default");
+        List<Article> articles = pageResponse.getContents();
 
         //then
         assertThat(articles).hasSize(3);
@@ -142,7 +144,9 @@ public class ArticleServiceTest {
 
         //then
         Article article = articleService.findById(targetId);
-        List<Article> articles = articleService.listArticles();
+        PageResponse<Article> pageResponse = articleService.listArticles(
+                new PageRequest(1, 10), "default");
+        List<Article> articles = pageResponse.getContents();
 
         assertThat(article).isNull();
         assertThat(articles).hasSize(2);
@@ -166,7 +170,9 @@ public class ArticleServiceTest {
         String keyword = "텍스트 게시판 만들기";
 
         //when
-        List<Article> articles = articleService.findByKeyword(keyword);
+        PageResponse<Article> pageResponse = articleService.findByKeyword(
+                keyword, new PageRequest(1, 10), "default");
+        List<Article> articles = pageResponse.getContents();
 
         //then
         assertThat(articles).hasSize(3);

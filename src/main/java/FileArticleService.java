@@ -28,14 +28,17 @@ public class FileArticleService implements ArticleService {
     }
 
     @Override
-    public List<Article> listArticles() {
+    public PageResponse<Article> listArticles(PageRequest pageRequest, String orderBy) {
         Path path = Path.of(ARTICLE_LIST_PATH);
 
         try (Stream<Path> files = Files.list(path)) {
-            return files.map(this::parseToArticle)
-                        .filter(Objects::nonNull)
-                        .sorted((origin, other) -> other.getRegDate().compareTo(origin.getRegDate()))
-                        .toList();
+            List<Article> articleList = files.map(this::parseToArticle)
+                                             .filter(Objects::nonNull)
+                                             .sorted(getComparator(orderBy))
+                                             .toList();
+
+            return getArticlePageResponse(pageRequest, articleList);
+
         } catch (IOException e) {
             e.printStackTrace(System.err);
             throw new RuntimeException(e);
@@ -115,21 +118,40 @@ public class FileArticleService implements ArticleService {
     }
 
     @Override
-    public List<Article> findByKeyword(String keyword) {
+    public PageResponse<Article> findByKeyword(String keyword, PageRequest pageRequest, String orderBy) {
         Path path = Path.of(ARTICLE_LIST_PATH);
 
         try (Stream<Path> files = Files.list(path)) {
-            return files.map(this::parseToArticle)
-                        .filter(Objects::nonNull)
-                        .filter(article ->
-                                article.getTitle().contains(keyword) || article.getContent().contains(keyword)
-                        )
-                        .sorted((origin, other) -> other.getRegDate().compareTo(origin.getRegDate()))
-                        .toList();
+
+            List<Article> articleList = files.map(this::parseToArticle)
+                                             .filter(Objects::nonNull)
+                                             .filter(article ->
+                                                     article.getTitle().contains(keyword) || article.getContent().contains(keyword)
+                                             )
+                                             .sorted(getComparator(orderBy))
+                                             .toList();
+
+            return getArticlePageResponse(pageRequest, articleList);
+
         } catch (IOException e) {
             e.printStackTrace(System.err);
             throw new RuntimeException(e);
         }
+    }
+
+    private PageResponse<Article> getArticlePageResponse(PageRequest pageRequest, List<Article> articleList) {
+        int totalPage = (int) Math.ceil(((double) articleList.size() / pageRequest.getPageSize()));
+
+        List<Article> contents = articleList.stream()
+                                            .skip(pageRequest.getOffSet())
+                                            .limit(pageRequest.getPageSize())
+                                            .toList();
+        return new PageResponse<>(
+                contents,
+                totalPage,
+                pageRequest.getPageNum(),
+                articleList.size()
+        );
     }
 
     private void attemptWrite(int id, Article article) {

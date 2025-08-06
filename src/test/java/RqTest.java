@@ -29,6 +29,10 @@ public class RqTest {
 
         //then
         assertEquals(input, rq.getMainCommand());
+
+        PageRequest pageRequest = rq.getPageRequest();
+        assertEquals(1, pageRequest.getPageNum());
+        assertEquals(10, pageRequest.getPageSize());
     }
 
     @Test
@@ -137,5 +141,22 @@ public class RqTest {
 
         assertEquals(expectedMainCommand, rq.getMainCommand());
         assertEquals(expectedOrderBy, rq.getOrderBy());
+    }
+
+    @Test
+    @DisplayName("list [페이징] 명령어")
+    void test() {
+        //given
+        String input = "list pageNum=3 pageSize=5";
+
+        //when
+        Rq rq = new Rq(input);
+
+        //then
+        assertEquals("list", rq.getMainCommand());
+
+        PageRequest pageRequest = rq.getPageRequest();
+        assertEquals(3, pageRequest.getPageNum());
+        assertEquals(5, pageRequest.getPageSize());
     }
 }
