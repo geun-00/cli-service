@@ -95,19 +95,19 @@ public class FileArticleService implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(int id) {
+    public boolean deleteArticle(int id) {
         Path path = Path.of(ARTICLE_LIST_PATH);
 
         try {
             File[] files = path.toFile().listFiles();
 
             if (files == null) {
-                return;
+                return false;
             }
 
             for (File file : files) {
                 if (attemptDeleteFile(file, id)) {
-                    return;
+                    return true;
                 }
             }
 
@@ -115,6 +115,8 @@ public class FileArticleService implements ArticleService {
             e.printStackTrace(System.err);
             throw new RuntimeException(e);
         }
+
+        return false;
     }
 
     @Override

@@ -140,7 +140,7 @@ public class ArticleServiceTest {
         int targetId = 1;
 
         //when
-        articleService.deleteArticle(targetId);
+        boolean result = articleService.deleteArticle(targetId);
 
         //then
         Article article = articleService.findById(targetId);
@@ -148,6 +148,7 @@ public class ArticleServiceTest {
                 new PageRequest(1, 10), "default");
         List<Article> articles = pageResponse.getContents();
 
+        assertThat(result).isTrue();
         assertThat(article).isNull();
         assertThat(articles).hasSize(2);
     }

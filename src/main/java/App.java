@@ -42,6 +42,16 @@ public class App {
         System.out.print("내용: ");
         String content = sc.nextLine();
 
+        if (title.isEmpty()) {
+            System.out.println("=> !!!제목을 입력해 주세요!!!\n");
+            return;
+        }
+
+        if (content.isEmpty()) {
+            System.out.println("=> !!!내용을 입력해 주세요!!!\n");
+            return;
+        }
+
         articleService.writeArticle(title, content);
         System.out.println("=> 게시글이 등록되었습니다.\n");
     }
@@ -82,16 +92,35 @@ public class App {
         System.out.printf("내용 (현재: %s): ", oldContent);
         String newContent = sc.nextLine();
 
+        if (newTitle.isEmpty()) {
+            System.out.println("=> !!!새로운 제목을 입력해 주세요!!!\n");
+            return;
+        }
+
+        if (newContent.isEmpty()) {
+            System.out.println("=> !!!새로운 내용을 입력해 주세요!!!\n");
+            return;
+        }
+
         articleService.updateArticle(id, newTitle, newContent);
         System.out.println("=> 게시글이 수정되었습니다.\n");
     }
 
     private void deleteArticle(int id) {
-        articleService.deleteArticle(id);
+        if (!articleService.deleteArticle(id)) {
+            System.out.println(id + "번 게시글이 존재하지 않습니다.\n");
+            return;
+        }
+
         System.out.println("=> 게시글이 삭제되었습니다.\n");
     }
 
     private void searchArticles(String keyword, PageRequest pageRequest) {
+        if (keyword.isEmpty()) {
+            System.out.println("=> !!!검색 키워드를 입력해 주세요!!!\n");
+            return;
+        }
+
         printArticles(articleService.findByKeyword(
                 keyword.toLowerCase(), pageRequest, "default"
         ));
@@ -120,6 +149,11 @@ public class App {
         int currentPage = pagedArticles.getCurrentPage();
         int totalPage = pagedArticles.getTotalPage();
         int totalCount = pagedArticles.getTotalCount();
+
+        if (articles.isEmpty()) {
+            System.out.println("           !!!아직 등록된 게시글이 없습니다.!!!     \n");
+            return;
+        }
 
         articles.forEach(article -> System.out.printf(
                 format,

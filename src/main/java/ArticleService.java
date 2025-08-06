@@ -10,7 +10,7 @@ public interface ArticleService {
     PageResponse<Article> listArticles(PageRequest pageRequest, String orderBy);
     Article findById(int id);
     void updateArticle(int id, String newTitle, String newContent);
-    void deleteArticle(int id);
+    boolean deleteArticle(int id);
     PageResponse<Article> findByKeyword(String keyword, PageRequest pageRequest, String orderBy);
 
     default String getCurrentDate() {

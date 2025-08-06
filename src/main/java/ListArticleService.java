@@ -56,8 +56,17 @@ public class ListArticleService implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(int id) {
-        articleList.removeIf(article -> article.getId() == id);
+    public boolean deleteArticle(int id) {
+        Article foundArticle = articleList.stream()
+                                          .filter(article -> article.getId() == id)
+                                          .findFirst()
+                                          .orElse(null);
+        if (foundArticle != null) {
+            articleList.remove(foundArticle);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
